@@ -5,9 +5,9 @@
 # wykonać w dowolny sposób we własnym zakresie.
 # =============================================================================
 import numpy as np
-
-
-def chebyshev_nodes(n: int = 10) -> np.ndarray | None:
+from typing import Union
+import math
+def chebyshev_nodes(n: int = 10) -> Union[np.ndarray ,None]:
     """Funkcja generująca wektor węzłów Czebyszewa drugiego rodzaju (n,) 
     i sortująca wynik od najmniejszego do największego węzła.
 
@@ -18,10 +18,15 @@ def chebyshev_nodes(n: int = 10) -> np.ndarray | None:
         (np.ndarray): Wektor węzłów Czebyszewa (n,).
         Jeżeli dane wejściowe są niepoprawne funkcja zwraca `None`.
     """
-    pass
+    xk=[]
+    k=np.linspace(0,n,n+1)
+    xk=np.ndarray(np.cos(k*math.pi/n))
+    
+    return xk
 
 
-def bar_cheb_weights(n: int = 10) -> np.ndarray | None:
+
+def bar_cheb_weights(n: int = 10) -> Union[np.ndarray ,None]:
     """Funkcja tworząca wektor wag dla węzłów Czebyszewa wymiaru (n,).
 
     Args:
@@ -36,7 +41,7 @@ def bar_cheb_weights(n: int = 10) -> np.ndarray | None:
 
 def barycentric_inte(
     xi: np.ndarray, yi: np.ndarray, wi: np.ndarray, x: np.ndarray
-) -> np.ndarray | None:
+) -> Union[np.ndarray ,None]:
     """Funkcja przeprowadza interpolację metodą barycentryczną dla zadanych 
     węzłów xi i wartości funkcji interpolowanej yi używając wag wi. Zwraca 
     wyliczone wartości funkcji interpolującej dla argumentów x w postaci 
@@ -56,8 +61,8 @@ def barycentric_inte(
 
 
 def L_inf(
-    xr: int | float | list | np.ndarray, x: int | float | list | np.ndarray
-) -> float | None:
+    xr: Union[int , float , list, np.ndarray], x: Union[int , float , list , np.ndarray]
+) -> Union[float ,None]:
     """Funkcja obliczająca normę L-nieskończoność. Powinna działać zarówno na 
     wartościach skalarnych, listach, jak i wektorach biblioteki numpy.
 
@@ -72,3 +77,51 @@ def L_inf(
         Jeżeli dane wejściowe są niepoprawne funkcja zwraca `None`.
     """
     pass
+
+
+
+def f1(x: Union[int , float , np.ndarray]) -> Union[int,float , np.ndarray]:
+
+    if not isinstance(x, (int, float, np.ndarray)):
+        raise TypeError(
+            f"Argument `x` musi być typu `np.ndarray`, `float` lub `int`, otrzymano: {type(x).__name__}."
+        )
+
+    return np.sign(x)*x+x^2
+
+def f2(x: Union[int , float , np.ndarray]) -> Union[int,float , np.ndarray]:
+
+    if not isinstance(x, (int, float, np.ndarray)):
+        raise TypeError(
+            f"Argument `x` musi być typu `np.ndarray`, `float` lub `int`, otrzymano: {type(x).__name__}."
+        )
+
+    return np.sign(x)*x+x^2
+
+
+def f3(x: Union[int , float , np.ndarray]) -> Union[int,float , np.ndarray]:
+
+    if not isinstance(x, (int, float, np.ndarray)):
+        raise TypeError(
+            f"Argument `x` musi być typu `np.ndarray`, `float` lub `int`, otrzymano: {type(x).__name__}."
+        )
+
+    return np.abs(np.sin(5*x)^3)
+
+def f4(x: Union[int , float , np.ndarray]) -> Union[int,float , np.ndarray]:
+
+    if not isinstance(x, (int, float, np.ndarray)):
+        raise TypeError(
+            f"Argument `x` musi być typu `np.ndarray`, `float` lub `int`, otrzymano: {type(x).__name__}."
+        )
+    a=[1,25,100]
+    return 1/(1+a*x^2)
+
+def f5(x: Union[int , float , np.ndarray]) -> Union[int,float , np.ndarray]:
+
+    if not isinstance(x, (int, float, np.ndarray)):
+        raise TypeError(
+            f"Argument `x` musi być typu `np.ndarray`, `float` lub `int`, otrzymano: {type(x).__name__}."
+        )
+
+    return np.sign(x)
